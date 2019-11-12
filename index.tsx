@@ -20,8 +20,8 @@ class App extends Component<AppProps, AppState> {
     return (
       <div>
       <Dropdown
-        click_element={click => 
-      < Button click={click}/>
+        click_element={(click, ref) => 
+      < Button click={click} ref={ref}/>
       }>
       aaaa
       </Dropdown>

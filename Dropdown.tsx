@@ -20,6 +20,7 @@ const Drop_down: FunctionComponent<Props> = ({
 
   const set_close = (): void => {
     set_open(false);
+    console.log('close');
   };
 
   const switch_open = (): void => {
@@ -41,7 +42,7 @@ const Drop_down: FunctionComponent<Props> = ({
   useEventListener('keydown', key_handler);
 
   return (
-    <div>
+    <React.Fragment>
       {click_element(switch_open)}
       <div ref={ref}>
         {is_open && (
@@ -58,7 +59,7 @@ const Drop_down: FunctionComponent<Props> = ({
           </div>
         )}
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 
