@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import styled from 'styled-components';
-import { useEventListener } from './Utility';
+import { useEventListener, useOnClickOutside } from './Utility';
 
 interface Props {
   click_element: (func: () => void) => void;
@@ -9,13 +9,14 @@ interface Props {
   want_width?: boolean;
 }
 
-export const Drop_down: FunctionComponent<Props> = ({
+const Drop_down: FunctionComponent<Props> = ({
   click_element,
   children,
   is_right,
   want_width,
 }) => {
   const [is_open, set_open] = React.useState(false);
+  const ref = React.useRef();
 
   const set_close = (): void => {
     set_open(false);
@@ -24,6 +25,9 @@ export const Drop_down: FunctionComponent<Props> = ({
   const switch_open = (): void => {
     set_open(!is_open);
   };
+
+  useOnClickOutside(ref, set_close);
+  
 
   const key_handler = React.useCallback(
     (event: KeyboardEvent) => {
@@ -37,12 +41,12 @@ export const Drop_down: FunctionComponent<Props> = ({
   useEventListener('keydown', key_handler);
 
   return (
-    <>
+    <div>
       {click_element(switch_open)}
-      <div>
+      <div ref={ref}>
         {is_open && (
-          <>
-            <Overlay onClick={set_close} />
+          <div>
+            {/*<Overlay onClick={set_close} />*/}
             <Drop_menu
               className="open"
               is_right={is_right}
@@ -51,10 +55,10 @@ export const Drop_down: FunctionComponent<Props> = ({
             >
               {children}
             </Drop_menu>
-          </>
+          </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
