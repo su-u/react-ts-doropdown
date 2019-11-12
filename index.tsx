@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import Hello from './Hello';
 import Dropdown from './Dropdown';
 import Button from './Button';
-import './style.css';
 
 interface AppProps { }
 interface AppState {
@@ -22,9 +20,8 @@ class App extends Component<AppProps, AppState> {
     return (
       <div>
       <Dropdown
-      click_element={click => 
-      <Button click={click}
-      />
+        click_element={click => 
+      < Button click={click}/>
       }>
       aaaa
       </Dropdown>
